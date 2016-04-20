@@ -21,4 +21,6 @@ def main():
     output = remote_conn.read_very_eager() 
     print output
 
+    remote_conn.close()
+
 main()

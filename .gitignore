@@ -60,3 +60,9 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+# svg image files
+.svg
+
+# .idea files
+.idea

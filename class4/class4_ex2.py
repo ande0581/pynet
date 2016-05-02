@@ -1,3 +1,5 @@
+# Use Paramiko to change the 'logging buffered <size>' configuration
+
 import paramiko
 import time
 

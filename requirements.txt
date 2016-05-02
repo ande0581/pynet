@@ -9,6 +9,7 @@ Jinja2==2.8
 jsonrpclib==0.1.7
 lazy-object-proxy==1.2.1
 MarkupSafe==0.23
+netmiko==0.4.3
 paramiko==1.16.0
 pexpect==4.0.1
 ply==3.8
@@ -20,6 +21,7 @@ pylint==1.5.5
 pysmi==0.0.7
 pysnmp==4.3.2
 PyYAML==3.11
+scp==0.10.2
 six==1.10.0
 wheel==0.24.0
 wrapt==1.10.7

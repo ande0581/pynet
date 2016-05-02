@@ -1,3 +1,5 @@
+# Use Paramiko to retrieve the entire 'show version' output
+
 import paramiko
 import time
 

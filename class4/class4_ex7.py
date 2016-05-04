@@ -30,9 +30,6 @@ def main():
     print "Post Change Logging Check:"
     print device_conn.send_command("show run | in logging")
 
-    # Save config
-    device_conn.send_command("wr mem")
-
     # Close connection
     device_conn.disconnect()
 

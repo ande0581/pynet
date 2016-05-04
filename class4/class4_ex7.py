@@ -1,8 +1,6 @@
 # Use Netmiko to change the logging buffer size (logging buffered <size>)
 
 from netmiko import ConnectHandler
-import sys
-import time
 
 
 def main():
@@ -22,7 +20,7 @@ def main():
     print device_conn.send_command("show run | in logging")
 
     # To change the logging buffered value
-    config_commands = ['logging buffered 30000', 'do wr mem']
+    config_commands = ['logging buffered 25000', 'do wr mem']
     output = device_conn.send_config_set(config_commands)
     print output
 

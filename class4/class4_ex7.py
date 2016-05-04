@@ -9,7 +9,7 @@ def main():
 
     router = {
         'device_type': 'cisco_ios',
-        'ip': '10.40.0.1',
+        'ip': '10.9.0.67',
         'username': 'myuser',
         'password': 'mypass'
     }
@@ -21,16 +21,10 @@ def main():
     print "Pre Change Logging Check:"
     print device_conn.send_command("show run | in logging")
 
-    # Change logging buffer
-    device_conn.config_mode()
-
-    if device_conn.check_config_mode():
-        print "Changing logging buffered...."
-        device_conn.send_command("logging buffered 25555")
-        device_conn.exit_config_mode()
-    else:
-        print "Entering Config Mode Failed"
-        sys.exit(0)
+    # To change the logging buffered value
+    config_commands = ['logging buffered 30000', 'do wr mem']
+    output = device_conn.send_config_set(config_commands)
+    print output
 
     # Show logging buffered
     print "Post Change Logging Check:"

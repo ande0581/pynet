@@ -7,14 +7,14 @@ def main():
 
     router1 = {
         'device_type': 'cisco_ios',
-        'ip': '10.40.0.1',
+        'ip': '10.9.0.67',
         'username': 'myuser',
         'password': 'mypass'
     }
 
     router2 = {
         'device_type': 'cisco_ios',
-        'ip': '10.40.0.1',
+        'ip': '10.63.176.57',
         'username': 'myuser',
         'password': 'mypass'
     }

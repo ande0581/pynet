@@ -18,12 +18,59 @@ import netmiko
 from netmiko.ssh_exception import NetMikoTimeoutException, NetMikoAuthenticationException
 
 
-def worker_show_version():
-    pass
+def worker_show_version(router, mp_queue):
+    '''
+    :return: A dictionary where the key is the device identifier
+    Value is (success|fail(boolean), return_string)
+    '''
+
+    try:
+        router['port']
+    except KeyError:
+        router['port'] = 22
+
+    identifier = '{ip}:{port}'.format(**router)
+    return_data = {}
+
+    show_ver_command = 'show version'
+    SSHClass = netmiko.ssh_dispatcher(router['device_type'])
+
+    try:
+        net_connect = SSHClass(**router)
+        show_version = net_connect.send_command(show_ver_command)
+    except (NetMikoTimeoutException, NetMikoAuthenticationException) as e:
+        return_data[identifier] = (False, e)
+
+        # Add data to the queue (for parent process)
+        mp_queue.put(return_data)
+        return None
+
+    return_data[identifier] = (True, show_version)
+    mp_queue.put(return_data)
 
 
-def print_output():
-    pass
+def print_output(results):
+
+    print "\nSuccessful devices:"
+    for a_dict in results:
+        for identifier, v in a_dict.iteritems():
+            (success, out_string) = v
+            if success:
+                print '\n\n'
+                print '#' * 80
+                print 'Device = {0}\n'.format(identifier)
+                print out_string
+                print '#' * 80
+
+    print "\n\nFailed devices:\n"
+    for a_dict in results:
+        for identifier, v in a_dict.iteritems():
+            success, out_string = v
+            if not success:
+                print 'Device failed = {0}'.format(identifier)
+
+    print "\nEnd time:", str(datetime.now())
+
 
 
 def main():
